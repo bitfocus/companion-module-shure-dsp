@@ -1,5 +1,4 @@
 module.exports = {
-
 	/**
 	 * INTERNAL: initialize feedbacks.
 	 *
@@ -8,7 +7,7 @@ module.exports = {
 	 */
 	initFeedbacks() {
 		// feedbacks
-		var feedbacks = {};
+		var feedbacks = {}
 
 		feedbacks['battery_level'] = {
 			label: 'Battery Level',
@@ -19,7 +18,7 @@ module.exports = {
 					label: 'Channel',
 					id: 'channel',
 					default: '1',
-					choices: this.CHOICES_CHANNELS
+					choices: this.CHOICES_CHANNELS,
 				},
 				{
 					type: 'number',
@@ -29,30 +28,30 @@ module.exports = {
 					max: 5,
 					default: 2,
 					required: true,
-					range: true
+					range: true,
 				},
 				{
 					type: 'colorpicker',
 					label: 'Foreground color',
 					id: 'fg',
-					default: this.rgb(255,255,255)
+					default: this.rgb(255, 255, 255),
 				},
 				{
 					type: 'colorpicker',
 					label: 'Background color',
 					id: 'bg',
-					default: this.rgb(100,255,0)
-				}
+					default: this.rgb(100, 255, 0),
+				},
 			],
 			callback: (feedback, bank) => {
 				if (this.api.getChannel(parseInt(feedback.options.channel)).batteryBars <= feedback.options.barlevel) {
 					return {
 						color: feedback.options.fg,
-						bgcolor: feedback.options.bg
-					};
+						bgcolor: feedback.options.bg,
+					}
 				}
-			}
-		};
+			},
+		}
 
 		feedbacks['channel_muted'] = {
 			label: 'Channel Muted',
@@ -63,30 +62,30 @@ module.exports = {
 					label: 'Channel',
 					id: 'channel',
 					default: '1',
-					choices: this.CHOICES_CHANNELS
+					choices: this.CHOICES_CHANNELS,
 				},
 				{
 					type: 'colorpicker',
 					label: 'Foreground color',
 					id: 'fg',
-					default: this.rgb(255,255,255)
+					default: this.rgb(255, 255, 255),
 				},
 				{
 					type: 'colorpicker',
 					label: 'Background color',
 					id: 'bg',
-					default: this.rgb(100,255,0)
-				}
+					default: this.rgb(100, 255, 0),
+				},
 			],
 			callback: (feedback, bank) => {
 				if (this.api.getChannel(parseInt(feedback.options.channel)).txMuteStatus == 'ON') {
 					return {
 						color: feedback.options.fg,
-						bgcolor: feedback.options.bg
-					};
+						bgcolor: feedback.options.bg,
+					}
 				}
-			}
-		};
+			},
+		}
 
 		feedbacks['interference_status'] = {
 			label: 'Interference Status',
@@ -97,64 +96,67 @@ module.exports = {
 					label: 'Channel',
 					id: 'channel',
 					default: '1',
-					choices: this.CHOICES_CHANNELS
+					choices: this.CHOICES_CHANNELS,
 				},
 				{
 					type: 'colorpicker',
 					label: 'Foreground color',
 					id: 'fg',
-					default: this.rgb(255,255,255)
+					default: this.rgb(255, 255, 255),
 				},
 				{
 					type: 'colorpicker',
 					label: 'Background color',
 					id: 'bg',
-					default: this.rgb(100,255,0)
-				}
+					default: this.rgb(100, 255, 0),
+				},
 			],
 			callback: (feedback, bank) => {
 				if (this.api.getChannel(parseInt(feedback.options.channel)).interferenceStatus == 'DETECTED') {
 					return {
 						color: feedback.options.fg,
-						bgcolor: feedback.options.bg
-					};
+						bgcolor: feedback.options.bg,
+					}
 				}
-			}
-		};
+			},
+		}
 
 		feedbacks['transmitter_turned_off'] = {
 			label: 'Transmitter Turned Off',
-			description: 'If the selected channel\'s transmitter is powered off, change the color of the button.',
+			description: "If the selected channel's transmitter is powered off, change the color of the button.",
 			options: [
 				{
 					type: 'dropdown',
 					label: 'Channel',
 					id: 'channel',
 					default: '1',
-					choices: this.CHOICES_CHANNELS
+					choices: this.CHOICES_CHANNELS,
 				},
 				{
 					type: 'colorpicker',
 					label: 'Foreground color',
 					id: 'fg',
-					default: this.rgb(255,255,255)
+					default: this.rgb(255, 255, 255),
 				},
 				{
 					type: 'colorpicker',
 					label: 'Background color',
 					id: 'bg',
-					default: this.rgb(100,255,0)
-				}
+					default: this.rgb(100, 255, 0),
+				},
 			],
 			callback: (feedback, bank) => {
-				if ((this.api.getChannel(parseInt(feedback.options.channel)).txType == 'Unknown') || (this.api.getChannel(parseInt(feedback.options.channel)).batteryBars == 255)) {
+				if (
+					this.api.getChannel(parseInt(feedback.options.channel)).txType == 'Unknown' ||
+					this.api.getChannel(parseInt(feedback.options.channel)).batteryBars == 255
+				) {
 					return {
 						color: feedback.options.fg,
-						bgcolor: feedback.options.bg
-					};
+						bgcolor: feedback.options.bg,
+					}
 				}
-			}
-		};
+			},
+		}
 
 		/*if (this.model.family != 'mxw') {
 			feedbacks['sample'] = {
@@ -177,6 +179,6 @@ module.exports = {
 			};
 		}*/
 
-		this.setFeedbackDefinitions(feedbacks);
-	}
+		this.setFeedbackDefinitions(feedbacks)
+	},
 }
